@@ -1,0 +1,26 @@
+<% provide(:title, "Show Team") %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: nil %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= @team.name %></div>
+      <div class="panel-body">
+        <%= image_tag(asset_path(@team.imagePath), size: "120x90") %>
+        <% if @team.nfl %>
+          NFL Team<br />
+        <% else %>
+          NCAA Team<br />
+        <% end %>
+        <p><% @team.imagePath %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

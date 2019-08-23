@@ -1,0 +1,31 @@
+<li>
+  <%= gravatar_for user, :size => 30 %>
+  <% if user.admin? %>
+  *&nbsp;
+  <% end %>
+  <%= link_to user.name, user %>
+  <% if current_user.admin? %>
+    <% if current_user.supervisor? && !current_user?(user) %>
+      | <%= link_to "delete", user, method: :delete,
+            data: { confirm: "Are you sure?" },
+            :title => "Delete #{user.name}" %>
+    <% end %>
+    <% if !user.supervisor? && !current_user?(user) %>
+      <% if user.admin? %>
+        | <%= link_to "Delete Admin status", admin_del_path(user.id),
+              data: { confirm: "Are you sure?" },
+              title: "Delete #{user.name} admin status" %>
+      <% else %>
+        | <%= link_to "Add Admin status", admin_add_path(user.id),
+              data: { confirm: "Are you sure?" },
+              title: "Add #{user.name} admin status" %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% if current_user?(user) %>
+      | <%= link_to "delete", user, method: :delete,
+            data: { confirm: "Are you sure?" },
+            :title => "Delete #{user.name}" %>
+    <% end %>
+  <% end %>
+</li>

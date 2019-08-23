@@ -1,0 +1,100 @@
+<% provide(:title, @user.name) %>
+<!-- Render the navigation bars -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<div class="row">
+  <div class="col-sm-4">
+    <h1>
+      <%= gravatar_for @user %>
+      <%= @user.name %>
+      <small>(<%= link_to @user.email, "#" %>)</small>
+    </h1>
+  </div>
+</div>
+<% if !current_user.confirmed? %>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 main">
+      <p>This user account needs to be confirmed before you can use this site.
+        Please look for the email with the subject <i>"Confirm Registration" </i>from
+        info@fbpm.com and click the Confirmation URL.  
+      </p>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <!-- Render the main navigation bar -->
+    <%= render 'shared/sidebar_nav', pool: nil %>
+    <div class="col-sm-8 main">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><%= "#{@user.name} Profile" %> </div>
+        <div class="panel-body">
+          <h3>My Pools</h3>
+          <ul id="my-pool">
+            <% if current_season(1) %>
+              <% user_pools = @user.pools.where(season_id: current_season(1).id) %>
+            <% end %>
+            <% if user_pools && user_pools.any? %>
+              <% user_pools.each do |pool| %>
+                <li><%= link_to "#{pool.name}", pool %></li>
+                <% entries = Entry.where(user_id: @user.id, pool_id: pool.id) %>
+                <div class = "table-responsive">
+                <table class="table table-striped table-bordered table-condensed table-hover">
+                  <tr>
+                    <th width="35%">Entry</th>
+                    <th width="10%">Week</th>
+                    <th width="25%">Survivor Status</th>
+                    <% if @user == current_user %>
+                      <th width="30%">Current Pick</th>
+                    <% end %>
+                  </tr>
+                  <% entries.each do |entry| %>
+                    <tr>
+                      <td><%= "#{entry.name}" %></td>
+                      <td align="center"><%= current_season(1).current_week %></td>
+                      <% if entry.survivorStatusIn %>
+                        <td align="center">In</td>
+                      <% else %>
+                        <td align="center">Out</td>
+                      <% end %>
+                      <% if @user == current_user %>
+                        <% if pool.haveSurvivorWinner? %>
+                          <td><%= link_to "Pool is done!", "#" %></td>
+                        <% else %>
+                          <% pick = Pick.where(entry_id: entry.id,
+                              week_id: pool.getCurrentWeek.id).first %>
+                          <% if pick %>
+                            <% game_pick = pick.game_picks.first %>
+                            <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
+                                    edit_pick_path(pick) %></td>
+                          <% else %>
+                            <% if pool.getCurrentWeek.week_number < pool.starting_week %>
+                              <td><%= link_to "Pool has not started yet!", "#" %></td>
+                            <% else %> 
+                              <% if entry.survivorStatusIn %>
+                                <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
+                              <% else %>
+                                <td>XXX</td>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      <% end %> 
+                    </tr>
+                  <% end %>
+                </table>
+                </div>
+              <% end %>
+            <% else %>
+              <p>You currently are not a member of any pool for the current Season.  
+                <%= link_to "Create", new_pool_path %>
+                or
+                <%= link_to "Join", pools_path %>
+                a pool.
+              </p>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<% provide(:title, 'Edit pool') %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<h1>Edit Pool</h1>
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: @pool %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Edit Pool</div>
+        <div class="panel-body">
+          <%= simple_form_for @pool, html: { class: 'form-horizontal' },
+            wrapper: :horizontal_form,
+            wrapper_mappings: {
+              check_boxes: :horizontal_radio_and_checkboxes,
+              radio_buttons: :horizontal_radio_and_checkboxes,
+              file: :horizontal_file_input,
+              boolean: :horizontal_boolean
+          } do |f| %>
+            <%= render 'fields', f: f %>
+            <%= f.button :submit, "Save changes", class: "btn btn-large btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,56 @@
+<% provide(:title, "Show Pool") %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: @pool %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= @pool.name %></div>
+      <div class="panel-body">
+        <strong>Pool Type</strong>
+        <%= render 'show_type', pool: @pool %><br />
+        <strong>Status</strong>
+        <% if @pool.isPublic %>
+          Public<br />
+        <% else %>
+          Private<br />
+        <% end %>
+        <% if !@current_week.nil? %>
+          <strong>Current Week</strong>
+          <%= @current_week.week_number %><br />
+          <% if @pool.poolType == Pool::POOL_TYPES[:Survivor] %>
+            <%= render 'show_survivor_board', pool: @pool, current_week: @current_week %>
+          <% elsif @pool.poolType == Pool::POOL_TYPES[:SUP] %>
+            <p>Sorry but SUP based pools are not supported at this time.</p>
+          <% elsif @pool.poolType == Pool::POOL_TYPES[:PickEm] %>
+            <p>Sorry but PickEm based pools are not supported at this time.</p>
+          <% elsif @pool.poolType == Pool::POOL_TYPES[:PickEmSpread] %>
+            <p>Sorry but PickEmSpread based pools are not supported at this time.</p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if 0 %>
+  <!-- >
+  <div class="col-md-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Members</div>
+      <div class="panel-body">
+        <% for user in @pool.users %>
+          <ul class="list-group" id="pool-members">
+            <%= render 'pool_member', user: user, pool: @pool %>
+          </ul->
+        <% end %>
+      </div>
+    </div>
+  </div>
+  < -->
+  <% end %>
+</div>
+
+
+
+

@@ -1,0 +1,26 @@
+<% provide(:title, 'My Pool index') %>
+<h1>My Pools</h1>
+
+<% if current_user.pools.any? %>
+<%= will_paginate %>
+
+<div  class="pools">
+  <table class="table table-striped 
+                table-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Membership</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @pools %>
+  </tbody>
+</table>
+
+<%= will_paginate %>
+<% else %>
+  <p> There are no pools available!</p>
+<% end %>

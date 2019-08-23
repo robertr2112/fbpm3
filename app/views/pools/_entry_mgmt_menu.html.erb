@@ -1,0 +1,46 @@
+<% if pool.isMember?(current_user) %>
+  <li class="menu-item dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" > Manage Entry <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <% if pool.allowMulti %>
+        <li><%= link_to "Create entry", new_pool_entry_path(pool) %></li>
+      <% end %>
+      <li class="divider"></li>
+      <% entries = pool.entries.where(user_id: current_user.id) %>
+      <% entries.each do |entry| %>
+        <li class="menu-item dropdown dropdown-submenu">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" > <%= entry.name %> </a>
+          <ul class="dropdown-menu">
+            <li class=menu-item><%= link_to "Edit entry", edit_entry_path(entry) %></li>
+            <li class=menu-item>
+              <%= link_to "Delete entry", entry, method: :delete,
+                  data: {confirm: "Are you sure?"}, title: "Delete#{entry.name}" %>
+            </li>
+            <% if !current_week.nil? %>
+              <% pick = entry.picks.where(week_id: current_week.id) %>
+              <% if pick.empty? %>
+                <% if entry.survivorStatusIn %>
+                  <% if !pool.getSurvivorWinner %>
+                    <% if pool.getCurrentWeek.week_number >= pool.starting_week %>
+                      <li><%= link_to "Make pick(s)", new_entry_pick_path(entry) %></li>
+                    <% end %>
+                  <% else %>
+                    <li><%= link_to "Pool is done!", "#" %></li>
+                  <% end %>
+                <% else %>
+                  <li><%= link_to "Survivor Status:Out", "#" %></li>
+                <% end %>
+              <% else %>
+                <% if current_week.checkStateOpen %>
+                  <% pick = pick[0] %>
+                  <li><%= link_to "Edit pick(s)", edit_pick_path(pick) %></li>
+                <% end %>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+

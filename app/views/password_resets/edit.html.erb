@@ -1,0 +1,24 @@
+<% provide(:title, "Update Password") %>
+<h1>Reset Password</h1>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Create New Pool</div>
+      <div class="panel-body">
+        <%= simple_form_for @user, :url => password_reset_path(params[:id]),
+               html: { class: 'form-horizontal pull-left' },
+               wrapper: :horizontal_form,
+               wrapper_mappings: {
+                check_boxes: :horizontal_radio_and_checkboxes,
+                radio_buttons: :horizontal_radio_and_checkboxes,
+                file: :horizontal_file_input,
+                boolean: :horizontal_boolean
+        } do |f| %>
+            <%= render 'fields', :f => f %>
+            <%= f.button :submit, 'Update Password', class: "btn btn-large btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

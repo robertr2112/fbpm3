@@ -1,0 +1,58 @@
+<table class = "table table-condensed">
+  <tbody>
+    <% prev_game = nil %>
+    <% games.order(:game_date).each do |game| %>
+      <% if game.game_date %>
+        <% gameDate = game.game_date.strftime("%A, %b %d") %>
+        <% gameTime = game.game_date.strftime("%l:%M %p %Z") %>
+        <% if (!prev_game || (game.game_date.strftime("%A, %b %d") != prev_game.game_date.strftime("%A, %b %d"))) %>
+          <tr> <td class="gameDate"><%= gameDate %> </td> </tr>
+        <% end %>
+      <% end %>
+      <tr>
+          <% team = Team.find(game.awayTeamIndex) %>
+          <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
+          <% if awayTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
+            <td class="awayTeamWon">
+              <b><%= team.name.split(' ').last.upcase %></b>
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
+            </td>
+            <% if showScores %>
+              <td class="awayScoreWon"><b><%= game.awayTeamScore %></b></td>
+            <% end %>
+          <% else %>
+            <td class="awayTeamLost">
+              <%= team.name.split(' ').last.upcase %>
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
+            </td>
+            <% if showScores %>
+              <td class="awayScoreLost"><%= game.awayTeamScore %></td>
+            <% end %>
+          <% end %>
+        <% if !showScores %>
+          <td class="gameDescriptor"><small>AT</small></td>
+        <% end %>
+          <% team = Team.find(game.homeTeamIndex) %>
+          <% homeTeamWon = game.wonGame?(game.homeTeamIndex) %>
+          <% if homeTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
+            <% if showScores %>
+              <td class="homeScoreWon"><b><%= game.homeTeamScore %></b></td>
+            <% end %>
+            <td class="homeTeamWon">
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
+              <b><%= team.name.split(' ').last.upcase %></b>
+            </td>
+          <% else %>
+            <% if showScores %>
+              <td class="homeScoreLost"><%= game.homeTeamScore %></td>
+            <% end %>
+            <td class="homeTeamLost">
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
+              <%= team.name.split(' ').last.upcase %>
+            </td>
+          <% end %>
+      </tr>
+      <% prev_game = game %>
+    <% end %>
+  </tbody>
+</table>

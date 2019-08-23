@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default weeks-nav" role="navigation">
+  <div class="container">
+    <div class="btn-group-sm">
+      <% if current_season(1) %>
+        <% if current_user.admin? %>
+          <%= link_to "Season #{season.year}", season_path(season), :class => "btn btn-primary",
+                           :role => "button" %>
+          <% if season.weeks.count < season.number_of_weeks %>
+            <%= link_to "Create new week", new_season_week_path(season), :class => "btn btn-primary",
+                           :role => "button" %>
+          <% end %>
+        <% else %>
+          <%= link_to "Season #{season.year}", "#", :class => "btn btn-primary",
+                           :role => "button" %>
+        <% end %>
+        <%= link_to "Week:", "#", :class => "btn btn-primary",
+                         :role => "button" %>
+        <% if season.weeks.any? %>
+          <% season.weeks.order(:week_number).each do |week| %>
+            <% if week.week_number == week_number %>
+              <%= link_to "#{week.week_number}", "#", :class => "btn btn-default",
+                           :role => "button" %>
+            <% else %>
+              <%= link_to "#{week.week_number}", week_path(week), :class => "btn btn-primary",
+                           :role => "button" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= link_to "Create new season", new_season_path %>
+      <% end %>
+    </div>
+  </div>
+</nav>

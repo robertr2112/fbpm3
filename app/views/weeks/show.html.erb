@@ -1,0 +1,44 @@
+<% provide(:title, "Week #{@week.week_number} Games") %>
+<!-- Render the navigation bars -->
+<%= render 'shared/mgmt_weeks_nav', season: @season, week_number: @week.week_number %>
+
+<!-- Now the main page -->
+<div class="row">
+<%= render 'shared/sidebar_nav', pool: nil %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= "Week #{@week.week_number}" %> &nbsp;-&nbsp;State:
+           <%= render "shared/show_week_state", week: @week %>
+      </div>
+      <div class="panel-body">
+        <h1> Week <%= @week.week_number %> Games</h1>
+        <% if current_user.admin? %>
+          <% if !@week.checkStateFinal %>
+            <%= link_to "Edit week?", edit_week_path(@week) %>
+          <% end %>
+          <% if @week.checkStatePend %>
+            <% if @week.deleteSafe?(@season) %>
+              <%= link_to "Delete week?", @week, method: :delete,
+                          data: {confirm: "Are you sure?"},
+                          title: "Delete week #{@week.week_number}" %>
+            <% end %>
+          <% end %>
+          <% if @week.checkStateClosed %>
+            <%= link_to "  Update scores?", add_scores_path(@week) %>
+          <% end %>
+        <% end %>
+
+        <% if @week.checkStateClosed || @week.checkStateFinal %>
+          <% showScores = true %>
+        <% else %>
+          <% showScores = false %>
+        <% end  %>
+        <%= render 'shared/games', week: @week, games: @games, nflTeams: true, showScores: showScores %>
+        <br />
+        <% if current_user.admin? && !@week.checkStateFinal%>
+          <%= render "shared/show_week_state_btn", week: @week %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

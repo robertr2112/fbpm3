@@ -1,0 +1,37 @@
+<% provide(:title, "Make picks") %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<div class="row">
+  <h1>Make picks for Week <%=@week.week_number%></h1>
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: @pool %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= "Make picks for Entry: #{@entry.name} "%></div>
+      <div class="panel-body">
+        <% @teams = Team.all.where(nfl: true) %>
+        <%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>
+        <br />
+        <%= simple_form_for([@entry, @pick], html: { class: 'form-inline' }) do |f| %>
+          <%= f.error_notification %>
+          <%= f.simple_fields_for :game_picks do |gp| %>
+            <fieldset>
+              <%= gp.error_notification %>
+              <% @select_teams = @pick.buildSelectTeams(@week) %>
+              <%= gp.input :chosenTeamIndex, label: "Pick Team:",
+                    collection: @select_teams, value_method: :id,
+                    label_method: :name,
+                    placeholder: "Pick Team",
+                    include_blank: true,
+                    input_html: { id: "pick" } %>
+            </fieldset>
+          <% end %>
+          <br />
+          <%= f.button :submit, label: "Submit Pick(s)", class: "btn btn-large btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

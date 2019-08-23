@@ -1,0 +1,24 @@
+  <%= f.error_notification %>
+
+  <%= f.input :name, placeholder: 'Name' %>
+
+<% if nil %>
+  <%= f.input :poolType, label: 'Pool Type', placeholder: 'Pool Type', 
+              collection: Pool::POOL_TYPES, selected: Pool::POOL_TYPES[:Survivor], disabled: true,
+              hint: 'At this time only Survivor pools are supported.' %>
+<% end %>
+  <%= f.input :poolType, label: 'Pool Type', placeholder: 'Pool Type', 
+              collection: Pool::POOL_TYPES, selected: Pool::POOL_TYPES[:Survivor],
+              hint: 'At this time only Survivor pools are supported.' %>
+
+  <%= f.input :allowMulti, label: 'Allow Multiple', 
+              hint: 'Allow multiple entries per user', as: :radio_buttons  %>
+              
+  <%= f.input :starting_week, label: 'Starting Week', placeholder: 'Starting Week' %>
+  
+  
+<% if nil %>
+  <%= f.input :isPublic, label: 'Public', as: :radio_buttons %>
+
+  <%= f.input :password, placeholder: 'Password' %>
+<% end %>

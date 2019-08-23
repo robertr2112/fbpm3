@@ -1,0 +1,24 @@
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Create User Account</div>
+        <div class="panel-body">
+          <%= simple_form_for @user, html: { class: 'form-horizontal' },
+            wrapper: :horizontal_form,
+            wrapper_mappings: {
+              check_boxes: :horizontal_radio_and_checkboxes,
+              radio_buttons: :horizontal_radio_and_checkboxes,
+              file: :horizontal_file_input,
+              boolean: :horizontal_boolean
+          } do |f| %>
+ 
+            <%= render 'fields', f: f, edit: 0 %>
+            <%= f.button :submit, 'Create my account', class: "btn btn-large btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

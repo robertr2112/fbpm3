@@ -1,0 +1,36 @@
+<% if pool && pool.isOwner?(current_user) %>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown"
+      href="#" > Pool Messages <b class="caret"></b> </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to "Invite people to join", invite_path(@pool.id) %></li>
+    <li><%= link_to "Send group message", new_pool_pool_message_path(pool) %></li>
+  </ul>
+</li>
+<% end %>
+
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown"
+      href="#" > Manage Pool <b class="caret"></b> </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to "Create new pool", new_pool_path %></li>
+    <li><%= link_to "Show all pools", pools_path %></li>
+    <% if pool && pool.isOwner?(current_user) %>
+      <li><%= link_to "Edit pool", edit_pool_path(pool) %></li>
+      <li><%= link_to "Delete pool", pool, method: :delete,
+          data: {confirm: "Are you sure?"}, title: "Delete#{pool.name}" %> </li>
+      <li><%= link_to "Send Group Message", new_pool_pool_message_path(pool) %>
+    <% end %>
+  </ul>
+</li>
+<% if pool && !pool.isOwner?(current_user) %>
+  <% if pool.isMember?(current_user) %>
+    <% if pool.isOpen? %>
+      <li><%= link_to "Leave Pool", leave_path(pool.id), id: pool.id %></li>
+    <% end %>
+  <% else %>
+    <% if pool.isOpen? %>
+      <li><%= link_to "Join Pool", join_path(pool.id), id: pool.id %></li>
+    <% end %>
+  <% end %>
+<% end %>

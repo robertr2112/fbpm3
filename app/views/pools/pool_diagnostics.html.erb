@@ -1,0 +1,61 @@
+
+<h2> <%= "Pool Diagnostics: #{@pool.name}" %> </h2>
+  <h4>
+    <b>Pool Status: </b>
+    <% if @pool.pool_done %>
+      Done
+    <% else %>
+      Active
+    <% end %>
+    <small><%= link_to "<Change Pool Status>", pool_diag_chg_path(@pool, pool_status: true, pool_id: @pool.id) %></small>
+  </h4>
+
+<% teams = Team.all.where(nfl: true).order('id ASC') %>
+<% entries = @pool.entries.sort_by {|entry| [entry[:survivorStatusIn] ? 0 : 1,entry[:name]] } %>
+<% entries.each do |entry| %>
+  <h4>
+    Entry:<%= link_to entry.name, user_path(entry.user_id), {class: "entry-name"} %> <%= "< Id: #{entry.id}>" %>,
+    <b>Survivor Status: </b>
+    <% if entry.survivorStatusIn %>
+      In
+    <% else %>
+      Out
+    <% end %>
+    <small><%= link_to "<Change Survivor Status>", pool_diag_chg_path(@pool, surv: true, entry_id: entry.id) %></small>
+  </h4>
+  <% @season.weeks.order(:week_number).each do |week| %>
+    <ul>
+      <li><%= "Week: #{week.week_number}" %></li>
+      <ul>
+        <% @picks = entry.picks.where(week_number: week.week_number) %>
+          <% if @picks.empty? %>
+            <li> no picks</li>
+          <% else %>
+            <% @picks.each do |pick| %>
+                <% game_pick = pick.game_picks.first %>
+                <% if game_pick %>
+                  <li>
+                    <%= "pick: #{pick.id} game pick: #{game_pick.id}, chosenTeamIndex: #{game_pick.chosenTeamIndex}" %>
+                    <% if week.checkStateFinal %>
+                      <% gameWon = false %>
+                      <% week.games.each do |game| %>
+                        <% if game.wonGame?(game_pick.chosenTeamIndex) %>
+                          <% gameWon = true %>
+                        <% end %>
+                      <% end %>
+                      <% if gameWon %>
+                        <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}(W)))" %> </small>
+                      <% else %>
+                        <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}(L)))" %> </small>
+                      <% end %>
+                    <% else %>
+                      <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}))" %> </small>
+                    <% end %>
+                  </li>
+                <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+    </ul>
+  <% end %>
+<% end %>

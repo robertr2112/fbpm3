@@ -1,0 +1,58 @@
+<% provide(:title, "Invite Message") %>
+<h1>Send Pool Invite Message</h1>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Send Pool Invite Message</div>
+      <div class="panel-body">
+        <%= form_tag send_invite_path(@pool), method: :post, method: :send_invite,
+                     class: 'form-horizontal', role: 'form' do %>
+
+          <div class="form-group">
+            <%= label_tag :subject, "Message Subject", class: "col-sm-2 control-label" %>
+            <div class="col-sm-8">
+              <%= text_field_tag :subject, params[:subject], size: 20, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :msg, "Message Body", class: "col-sm-2 control-label" %>
+            <div class="col-sm-8">
+              <%= text_area_tag :msg, params[:msg], rows: "10", class: "form-control" %>
+            </div>
+          </div>
+
+          <h3> Recepients </h3>
+          <div class="form-group select optional">
+            <%= label_tag :emailPoolList, "Select Pool", class: "col-sm-2 control-label" %>
+            <div class="col-sm-6">
+              <%= select_tag :emailPoolList, options_from_collection_for_select(@pool_list, "id", "name"),
+                              { include_blank: true, class: 'form-control select optional',
+                                id: 'emailPoolList' } %>
+              <p class="help-block">Adds email addresses from selected pool</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :emailListAddrs, "Add email addresses", class: "col-sm-2 control-label" %>
+            <div class="col-sm-8">
+              <%= text_area_tag :emailListAddrs, params[:emailListAddrs], rows: "2", class: "form-control" %>
+              <p class="help-block">Add email addresses separated by a comma</p>
+              <% @email_addr_errors.each do |email_error| %>
+                <p class="help-block error-msg"><%= "#{email_error}" %></p>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <%= submit_tag "Send email", class: "btn btn-large btn-primary" %>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

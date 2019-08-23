@@ -1,0 +1,28 @@
+<% provide(:title, "Edit Team") %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<h1>Edit Team</h1>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: nil %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Edit Team Info</div>
+      <div class="panel-body">
+        <%= simple_form_for @team, html: { class: 'form-horizontal' },
+          wrapper: :horizontal_form,
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean
+          } do |f| %>
+            <%= render 'fields', f: f, edit: 1 %>
+            <%= f.button :submit, 'Update Team Info', class: "btn btn-large btn-primary" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

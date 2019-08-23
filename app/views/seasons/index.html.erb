@@ -1,0 +1,36 @@
+<% provide(:title, 'Season index') %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<h1>All Seasons</h1>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: @pool %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Create New Pool</div>
+      <div class="panel-body">
+        <% if @seasons.any? %>
+          <%= will_paginate %>
+          <table class="table table-striped table-condensed table-hover">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Type</th>
+                <th>Number of Weeks</th>
+                <th>Current Week</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @seasons %>
+            </tbody>
+          </table>
+          <%= will_paginate %>
+        <% else %>
+          <p> There are no seasons available!</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

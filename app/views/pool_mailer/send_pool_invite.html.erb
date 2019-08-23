@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <%= image_tag(attachments['fbpm_logo.png'].url, class: "img-rounded") %>
+    <h3>You've been invited to join an 'NFL Survivor' pool!</h3>
+    
+    <p>
+    This is a Survivor pool, the rules of the pool are listed below. Click this link
+    <%= link_to @pool.name, pool_url(@pool) %>  if you wish to join the pool!  Feel free
+    to invited friends who you think might also be interested in joining the pool!
+    </p>
+    
+    <h4>Survivor Football Pool Rules:</h4>
+    <ol>
+    <li><p>You must pick 1 NFL team prior to the ‘deadline’ each week, whichever team you feel
+           will win their game (no spreads).  You can pick each team only 1 time during the
+           duration of the contest (you can’t pick the same team twice).</p></li>
+
+    <li><p>If the team you pick loses then that entry is eliminated from the contest.</p></li>
+
+    <li><p>The deadline for your picks each week is before kickoff of the first game.  If your pick
+           is not received prior to the ‘deadline’ you are automatically eliminated from the contest,
+           no exceptions.</p></li>
+
+    </ol>
+
+    <h3>Message from Pool Administrator for Pool: <%= link_to @pool.name, pool_url(@pool) %></h3>
+    <% paragraphs = @msg.split("\n") %>
+    <% paragraphs.each do |paragraph| %>
+      <p><%= paragraph %></p>
+    <% end %>
+    <p>Thanks, Pool Administrator</p>
+  </body>
+</html>

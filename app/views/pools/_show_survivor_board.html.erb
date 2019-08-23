@@ -1,0 +1,116 @@
+<!-- Pool information and User pick for current week -->
+<h4><u>Picks for week: <%= "#{@current_week.week_number}" %></u></h4>
+<% entries = @pool.entries.where(user_id: current_user.id) %>
+<% entries.each do |entry| %>
+  <b><%= "#{entry.name}:" %></b>&nbsp;
+  <% pick = entry.picks.where(entry_id: entry.id, week_id: @current_week.id).first %>
+  <% if !pick.nil? %>
+    <% game_pick = pick.game_picks.where(pick_id: pick.id).first %>
+    <% team_name = Team.find(game_pick.chosenTeamIndex).name %>
+    <%= "#{team_name}" %>
+    <% if @current_week.open? %>
+      <small><%= link_to "[Edit Pick]", edit_pick_path(pick) %></small>
+    <% end %>
+  <% else %>
+    <% if !pool.haveSurvivorWinner? %>
+      <% if entry.survivorStatusIn %>
+        <% if pool.getCurrentWeek.week_number < pool.starting_week %>
+          <%= link_to "Pool has not started yet!", "#" %>
+        <% else %> 
+          <small><%= link_to "[Make Pick]", new_entry_pick_path(entry) %></small>
+        <% end %>
+      <% else %>
+        Survivor Status: Out of pool
+      <% end %>
+    <% else %>
+      Pool is done!
+    <% end %>
+  <% end %>
+  <br />
+<% end %>
+
+<% if pool.haveSurvivorWinner? %>
+  <h3>Pool Winner(s)</h3>
+  <% winners = pool.getSurvivorWinner %>
+  <% if winners.count > 1 %>
+    <p> The winners of the pool are:
+  <% else %>
+    <p> The winner of the pool is:
+  <% end %>
+  <ul>
+    <% winners.each do |entry| %>
+      <% user = User.find(entry.user_id) %>
+      <li><i><b><%= "#{user.name} (#{entry.name})" %></b></i></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<!-- Show the current board for the pool -->
+<h3>Current Board</h3>
+<div id="survivor-board" class="table-responsive survivor-board-table">
+<table class="table table-striped table-bordered table-condensed table-hover">
+  <tr>
+    <td class="survivor-board-name"></td>
+    <% @season.weeks.order(:week_number).each do |week| %>
+      <% if week.week_number >= pool.starting_week %>
+        <td class="entry-header"><%= "Week #{week.week_number}" %></td>
+      <% end %>
+    <% end %>
+  </tr>
+  <% teams = Team.all.where(nfl: true).order('id ASC') %>
+  <% entries = @pool.entries.sort_by {|entry| [entry[:survivorStatusIn] ? 0 : 1,entry[:name]] } %>
+  <% entries.each do |entry| %>
+    <% entryOut = false %>
+    <tr>
+      <% if entry.entryStatusGood? %>
+        <td class="entry-name"><%= link_to entry.name, user_path(entry.user_id), {class: "entry-name"} %></td>
+      <% else %>
+        <td class="entry-error"><%= link_to entry.name, user_path(entry.user_id), {class: "entry-name-out"} %></td>
+      <% end %>
+      <% @season.weeks.order(:week_number).each do |week| %>
+        <% if (week.week_number >= pool.starting_week) %>
+          <% @picks = entry.picks.where(week_number: week.week_number) %>
+          <% if @picks.empty? %> 
+            <% if week.checkStateClosed || week.checkStateFinal ||
+                  !entry.entryStatusGood? %>
+              <% if entryOut %>
+                <td class="entry-out">XXX</td>
+              <% else %>
+                <td class="entry-out">Out</td>
+                <% entryOut = true %>
+              <% end %>
+            <% else %>
+              <td class="entry-blank"></td>
+            <% end %>
+          <% else %>
+            <% @picks.each do |pick| %>
+              <% game_pick = pick.game_picks.first %>
+              <% team_nickname = 
+                      teams[game_pick.chosenTeamIndex-1].name.split(" ").last %>
+              <% if week.checkStateOpen %>
+                <td></td>
+              <% else %>
+                <% if !week.checkStateFinal %>
+                  <td class="entry-base"><%= team_nickname %></td>
+                <% else %>
+                  <% gameWon = false %>
+                  <% week.games.each do |game| %>
+                    <% if game.wonGame?(game_pick.chosenTeamIndex) %>
+                      <% gameWon = true %>
+                    <% end %>
+                  <% end %>
+                  <% if gameWon %>
+                    <td class="entry-success"><%= team_nickname %></td>
+                  <% else %>
+                    <td class="entry-error"><%= team_nickname %></td>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</div>

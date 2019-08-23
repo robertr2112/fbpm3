@@ -1,0 +1,160 @@
+<% provide(:title, 'Help') %>
+<h1>Help</h1>
+<p>
+This document is broken up into two main sections: <b><a href="#admin">Pool Administrators</a></b> and <b><a href ="#members">Pool Members</a></b>. Pool Administrators include the creators of the Pool and any other user who has also been given permission as a Pool administrator. Pool Members include all users who have joined the pool and all Pool Administrators.
+</p>
+
+  <div class="row">
+    <div class="span3 bs-docs-sidebar">
+      <ul class="nav nav-list bs-docs-sidenav">
+        <li><a href="#admin"><i class="icon-chevron-right"></i> Pool Administration</a></li>
+        <li><a href="#managepool"><i class="icon-chevron-right"></i> Managing a Pool</a></li>
+        <li><a href="#manageweek"><i class="icon-chevron-right"></i> Managing Weeks</a></li>
+        <li><a href="#members"><i class="icon-chevron-right"></i> Managing Entries</a></li>
+      </ul>
+    </div>
+  <div class="span9">
+      
+    <section id="admin">
+      <div class="page-header">
+        <h2>Pool Administrators</h2>
+      </div>
+  
+      <p>
+      Pool Administrators are responsible for all of the weekly management of the pool.  This includes the entering the game matchups for each week.  Opening the pool to allow picks and closing it when the window for picking games as been concluded. Entering all of the scores for each game. And marking the pool as final, which will then tabulate any needed data based on the type of pool. Pool Administrators are responsible for <b><a href="#createweek">creating</a></b>, <b><a href="#editweek">editing</a></b>, and <b><a href="#manageweek">managing weeks.</a></b>
+      </p>
+
+      <h3 id="managepool">Managing a Pool</h3>
+      <p>
+      After a user has created a pool, they are responsible for the management of that pool.  The management of the pool involves <a href ="#createpool">creating</a> and <a href="manageweek">managing the weeks</a> for the pool.
+      </p>
+
+      <p>
+      The pool administrator can also send emails to all members of the pool to inform them of the events, like the following:
+      </p>
+      <ul>
+        <li>When a week is open for users to make their picks.</li>
+        <li>The deadline for which picks must be made.</li>
+        <li>Any information that is relevant to all members of the pool.</li>
+      </ul>
+
+      <h4 id="createpool">Creating a Pool</h4>
+      <p>
+      Any user can create a pool.  Use the <b>Pool->Create Pool</b> menu item or the <b>Create Pool</b> link on the Home page to create a pool. When creating a pool you must enter the following information:
+      </p>
+      <ul>
+        <li> Name </li>
+          The <i>name</i> must be unique for the pool, an error will be reported if the name is not unique.
+        <li> Pool Type </li>
+          The <i><a href="#pooltype">type of pool</a></i>.
+        <li> Multiple Entries </li>
+          The default is the pool will only allow one entry per pool member.  If you want to allow a pool member to have more than one entry then set <i>Multiple Entries</i> to true.
+        <p>
+          The user that creates the pool is automatically added as a member of the pool and becomes the administrator of the pool. If that user only wants to be the pool administrator and not also a member of the pool then the user can <a href="#deleteentry">delete the entry</a> and then that user will only be a pool administrator.
+        </p>
+      </ul>
+
+      <h4 id="editpool">Editing a Pool</h4>
+      <p>
+      All of the settings of the pool can be changed until the first week has been created.  Refer to <a href="#manageweek">Managing Weeks</a> for information on Weeks. After the first week has been created only the <i>Name</i> of the pool can be changed.
+      </p>
+
+      <h4 id="deletepool">Deleting a Pool</h4>
+      <p>
+      Only the administrator of the pool can delete a pool. <b>Caution:</b>Deleting the pool deletes <b>ALL</b> information associated with that pool, including all weeks and member entries.
+      </p>
+
+      <h4 id="joinpool">Joining a pool</h4>
+      <p>
+      A user can join an existing pool by going to the list of pools and selecting the <b>Join</b> link. When a user joins a pool an entry is automatically created for the pool.  If the pool supports multiple entries then the user can create additional entries manually.  See <i>Managing Entries</i> for more information on entries.
+      </p>
+
+      <h4 id="leavepool">Leaving a pool</h4>
+      <p>
+      A pool member can leave a pool anytime up until the first week of the pool has been closed. However, if the pool member deleted an entry for that pool.
+      </p>
+
+      <h4 id="pooltype">Types of Pools</h4>
+      <p>
+      Currently there are four types of pools that can be run on this site. Three pools are NFL based pools: PickEm, PickEmSpread, and Survivor. And one is an NCAA college football pool: SUP.
+      </p>
+
+      <ul>
+        <li>
+        <b><u>PickEm</u></b>
+        </li>
+          <b><i>This pool type is currently not supported.</i></b>
+          <p>
+          The PickEm pool that lets you pick every NFL game each week for the whole season. Each week each user in the pool picks every NFL game, straight up, that is available for that week. The picks must be entered by NOON the day before the first game that week. It displays weekly totals (Wins, Ties, and Losses) as well as the Season totals for each user. The season totals also includes how many weeks were won/tied by each user.
+          </p>
+
+        <li> <b><u>PickEmSpread</u></b> </li>
+          <b><i>This pool type is currently not supported.</i></b>
+          <p>
+          The PickEmSpread pool is exactly the same as the PickEm pool but the picks are made against the spread. All other details are the same as the PickEm pool.
+          </p>
+
+        <li> <b><u>Survivor</u></b> </li>
+          <p>
+          The Survivor pool allows a user to pick ONE NFL team each week. And each team can only be picked one time during the season. If the team picked by the user wins then that user moves on in the pool.  If the team picked by the user loses then that user is out of the pool for the season. The winner of the pool is the last user standing.
+          </p>
+
+        <li> <b><u>SUP</u></b> </li>
+          <b><i>This pool type is currently not supported.</i></b>
+          <p>
+          The Stupid Underdog Pool(SUP) is a NCAA college football picking game.  Each week a user picks an underdog, against the spread, and if that underdog WINS THE GAME OUTRIGHT then the user gets the number of points of the spread. For example, if the Texas Longhorns are playing the Oklahoma Sooners and the Sooners are favored by +5, then a user who picks the Longhorns would get 5 points for the Longhorns winning the game outright. It is not enough for the team to win against the spread.
+          </p>
+      </ul
+    </section>
+
+    <section id="manageweek">
+      <div class="page-header">
+        <h3>Managing Weeks</h3>
+      </div>
+  
+      <p>
+      The administrator of the pool is responsible for creating a week, which involves entering all of the game information, managing the <i><a href="#states">state</a></i> of the week (marking it open for picks, closed for picks, and mark it final after all games have been completed and scores entered), and entering the scores for each game once they have been completed.
+      </p>
+      <h4 id="createweek">Create Weeks</h4>
+      <p>
+      Creating a week just entails entering all of the game matchups for that week. Weeks can be created at any time, the Pool management automatically keeps track of which week is the current week.  This allows a pool administrator to enter all of the weeks for the entire season at the beginning of the season, if so desired.
+      </p>
+
+      <h4 id="editweek">Editing Weeks</h4>
+      <p>
+      The game matchups for a week can be edited up until the week has been marked closed.  Once the week has been marked closed than editing the week will prompt to enter the scores for the games instead of changing the game matchups. The week cannot be edited at all once the week has been marked Final.
+      </p>
+
+      <h5 id="states">Week States</h5>
+      <p>Each week goes through four distinct states, Pend, Open, Closed, and Final.  The administrator of the pool is responsible for moving the week to each appropriate state by using the <b>week->move to <state></b> link on the pool's page.
+      </p>
+      <ul>
+        <li>
+          <b>Pend</b> - The week is in this state after the week has been created and the initial list of games have been entered.  While the week is in the <b>Pend</b> state the games can be edited in case of mistakes or to add games. This is the only state where the games for the current week can be edited.
+        </li>
+        <li>
+          <b>Open</b> - When the week is moved to the <b>Open</b> state then the week is open for pool members to make their picks for each entry for this week.
+        </li>
+        <li>
+          <b>Closed</b> - The week is moved to the closed state to end the period for pool members to enter their picks for each entry for this week. The scores for the games must be entered while the week is still in the closed state. The pool will not be allowed to move to the <b>Final</b> state until all of the games scores have been entered. The state can be moved back to the <b>Open</b> state at the discretion of the pool administer. 
+        </li>
+        <li>
+          <b>Final</b> - When the week is moved to the <b>Final</b> state all of the entries are checked to see if they are correct or not and the results are updated in the entry and pool totals, if required based on <i>Pool Type</i>
+        </li>
+      </ul>
+    </section>
+
+    <section id="members">
+      <div class="page-header">
+        <h2>Pool Members</h2>
+      </div>
+  
+      <h3>Managing Entries</h3>
+      <p>
+      An entry is automatically created when a user joins the pool (or creates a pool.) If the pool is setup to allow multiple entries then the user can create additional entries for the pool.  Entries can only be created, or deleted, up until the time the first week has been marked as closed.
+      </p>
+      <p>
+      The user must make, or edit, their picks for each entry while the week is in the <b>Open</b> state.  Once the week is marked closed the user can no longer make picks for entries.
+      </p>
+    </section>
+  </div>

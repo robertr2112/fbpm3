@@ -1,0 +1,10 @@
+  <tr>
+    <td><%= link_to season.year, season %></td>
+    <% if season.nfl_league %>
+      <td>NFL</td>
+    <% else %>
+      <td>College</td>
+    <% end %>
+    <td><%= "#{season.number_of_weeks}" %></td>
+    <td><%= "#{season.current_week}" %></td>
+  </tr>

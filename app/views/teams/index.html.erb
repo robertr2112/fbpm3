@@ -1,0 +1,33 @@
+<% provide(:title, 'Team index') %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<h1>All Teams</h1>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: nil %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">List of All Teams</div>
+      <div class="panel-body">
+        <%= will_paginate %>
+        <table class="table table-striped table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>NFL</th>
+              <% if current_user.admin? %>
+                <th>Edit</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render @teams %>
+          </tbody>
+        </table>
+        <%= will_paginate %>
+      </div>
+    </div>
+  </div>
+</div>

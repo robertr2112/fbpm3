@@ -1,0 +1,8 @@
+  <tr>
+        
+    <td><%= image_tag(asset_path(team.imagePath), size: "40x30") %>&nbsp;&nbsp;<%= link_to team.name, team %></td>
+    <td><%= team.nfl %></td>
+    <% if current_user.admin? %>
+      <td><%= link_to "Edit", edit_team_path(team) %></td>
+    <% end %>
+  </tr>

@@ -1,0 +1,24 @@
+<% provide(:title, 'All users') %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<h1>All users</h1>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: @pool %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Create New Pool</div>
+      <div class="panel-body">
+        <%= will_paginate %>
+  
+        <ul class="users">
+          <%= render @users.sort_by {|u| u.name.downcase} %>
+        </ul>
+
+        <%= will_paginate %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<li class="list-group-item">
+  <% if pool.isOwner?(user) %>
+    <%= gravatar_for user, :size => 20 %>
+    <small><%= link_to "* #{user.name}", user %></small>
+  <% else %>
+    <%= gravatar_for user, :size => 20 %>
+    <small><%= link_to user.name, user %></small>
+  <% end %>
+</li>

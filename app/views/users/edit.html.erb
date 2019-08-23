@@ -1,0 +1,32 @@
+<% provide(:title, "Edit user") %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<h1>Update your profile</h1>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: @pool %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Update User Profile</div>
+      <div class="panel-body">
+        <%= simple_form_for @user, html: { class: 'form-horizontal' },
+            wrapper: :horizontal_form,
+            wrapper_mappings: {
+              check_boxes: :horizontal_radio_and_checkboxes,
+              radio_buttons: :horizontal_radio_and_checkboxes,
+              file: :horizontal_file_input,
+              boolean: :horizontal_boolean
+        } do |f| %>
+            <%= render 'fields', f: f, edit: 1 %>
+            <%= f.button :submit, 'Update Profile', class: "btn btn-large btn-primary" %>
+        <% end %>
+
+        <p></p>
+        <%= gravatar_for @user %>
+        <a href="http://gravatar.com/emails", target="_blank">change </a>
+      </div>
+    </div>
+  </div>
+</div>

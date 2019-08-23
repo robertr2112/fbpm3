@@ -1,0 +1,43 @@
+<% provide(:title, 'Pool index') %>
+<!-- Render the season navigation bar -->
+<%= render 'shared/mgmt_weeks_nav', season: current_season(1), week_number: 0 %>
+
+<h1>All Pools</h1>
+
+<div class="row">
+  <!-- Render the main navigation bar -->
+  <%= render 'shared/sidebar_nav', pool: @pool %>
+  <div class="col-sm-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">List of All Pools</div>
+      <div class="panel-body">
+        <% if current_season(1) %>
+          <% pools_list = Pool.where(season_id: current_season(1).id) %>
+        <% end %>
+        <% if pools_list.any? %>
+          <%= will_paginate %>
+          <table class="table table-striped table-condensed table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Membership</th>
+                <% if current_user.admin? %>
+                  <th>Diagnostics</th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @pools %>
+            </tbody>
+          </table>
+          <%= will_paginate %>
+        <% else %>
+          <p> There are no pools available!</p>
+          <%= link_to "Create a pool", new_pool_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

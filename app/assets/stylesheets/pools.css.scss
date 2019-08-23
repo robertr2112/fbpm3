@@ -1,0 +1,62 @@
+@mixin table-entry-width($width) {
+  width: $width;
+}
+
+.entry-header {
+  @include table-entry-width(150px);
+  font-weight: bold;
+}
+
+.entry-blank {
+  @include table-entry-width(150px);
+}
+
+.entry-name {
+  color: black;
+  @include table-entry-width(250px);
+}
+
+.entry-name-out {
+  color: red;
+  @include table-entry-width(250px);
+}
+
+.entry-out {
+  @include table-entry-width(150px);
+}
+
+.entry-base {
+  @include table-entry-width(150px);
+}
+
+.entry-success {
+  color: green;
+  @include table-entry-width(150px);
+}
+
+.entry-error {
+  color: red;
+  @include table-entry-width(150px);
+}
+
+.current-week {
+  color: #013ADF;
+}
+
+ul#pool-members {
+  list-style-type: none;
+}
+
+.games-table {
+  td {
+    align: center;
+  }
+}
+
+.survivor-board-table {
+  overflow: auto;
+  /* max-height:400px; !!! uncomment this to add vertical scroll bar */
+  width: 100%;
+  margin: 0;
+}
+

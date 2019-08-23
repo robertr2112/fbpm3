@@ -1,0 +1,9 @@
+<% if week.checkStatePend %>
+Pending
+<% elsif week.checkStateOpen %>
+Open
+<% elsif week.checkStateClosed %>
+Closed
+<% else %>
+Final
+<% end %>

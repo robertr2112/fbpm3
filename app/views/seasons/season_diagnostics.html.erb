@@ -1,0 +1,40 @@
+
+<h2> <%= "Season Diagnostics: #{@season.year}" %> </h2>
+
+<small><%= link_to "<Update NFL Team info in Database>",
+              season_diag_chg_path(@season, update_nfl_team_info: true) %></small>
+<h4> <%= "State: #{@season.state}" %></h4>
+<h4> <%= "Number of Weeks: #{@season.number_of_weeks}" %></h4>
+<h4>
+  <%= "Current Week: #{@season.current_week}" %>
+  <% up_val = @season.current_week + 1 %>
+  <% dwn_val = @season.current_week - 1 %>
+  <small><%= link_to "<Change up: #{up_val}>",
+              season_diag_chg_path(@season, cur_week: true, number: up_val) %></small>
+  <small><%= link_to "<Change down: #{dwn_val}>",
+              season_diag_chg_path(@season, cur_week: true, number: dwn_val) %></small>
+</h4>
+<% @season.weeks.order(:week_number).each do |week| %>
+  <ul>
+    <li>
+      <%= "Week: #{week.week_number} State: " %>
+      <%= render "shared/show_week_state", week: week %>
+      <div class="btn-group btn-group-xs">
+        <button type="button" class="btn btn-default btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
+          <%= "Change Week: #{week.week_number} State" %>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to "Mark week pending",
+                   season_diag_chg_path(@season, chg_week_state: true, week: week, state: 0) %></li>
+          <li><%= link_to "Mark week open",
+                   season_diag_chg_path(@season, chg_week_state: true, week: week, state: 1) %></li>
+          <li><%= link_to "Mark week closed",
+                   season_diag_chg_path(@season, chg_week_state: true, week: week, state: 2) %></li>
+          <li><%= link_to "Mark week final",
+                   season_diag_chg_path(@season, chg_week_state: true, week: week, state: 3) %></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+<% end %>

@@ -1,0 +1,36 @@
+<div class="col-sm-2">
+  <!-- div class="panel panel-primary" -->
+  <div class="panel panel-default">
+    <div class="panel-heading">Navigation </div>
+    <div class="panel-body">
+      <ul class="nav nav-pills nav-stacked">
+        <li><%= link_to '<i class="fa fa-user fa-fw"></i>All Users'.html_safe, users_path %></li>
+        <li><%= link_to '<i class="fa fa-user fa-fw"></i>Profile'.html_safe, current_user %></li>
+        <% if current_season(1) %>
+          <% user_pools = current_user.pools.where(season_id: current_season(1).id) %>
+        <% end %>
+        <% if user_pools && user_pools.any? %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              My Pools <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <% user_pools.each do |pool| %>
+                <% if pool.id %>
+                  <li><%= link_to "#{pool.name}", pool_path(pool) %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <li class="divider"></li>
+        <%= render 'shared/mgmt_pools_nav', pool: pool %>
+        <% if pool %>
+          <% if pool.typeSurvivor? %>
+            <%= render 'pools/entry_mgmt_menu', pool: pool, current_week: pool.getCurrentWeek %>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="center col-md-8 col-md-offset-2">
+    <%= image_tag("fpp_logo.png", size: "240", class: "img-rounded") %>
+    <h1>Welcome to Football Pool Mania!</h1>
+    <p class="lead">
+      Here you can test your football prognosticating skills against your friends
+      and strangers alike. Join an existing pool or create one and invite your
+      friends.
+    </p>
+    <% if !signed_in? %>
+      <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+      <br \><small class=main-sign-in>Already a member? <%= link_to "Sign in", signin_path %></small>
+    <% elsif !current_user.confirmed? %>
+      <p>This user account needs to be confirmed before you can use this site.
+      Please look for the email with the subject <i>"Confirm Registration" </i>from
+         info@fbpm.com and click the Confirmation URL.  
+      </p>
+    <% else %>
+      <%= link_to "Create", new_pool_path %>
+      or
+      <%= link_to "Join", pools_path %>
+      a pool.
+    <% end %>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,10 @@
+  <%= f.error_notification %>
+
+  <%= f.input :name, placeholder: 'Name' %>
+  
+  <%= f.input :nfl, label: 'NFL Team?', 
+              hint: 'Is this NFL or NCAA team?', as: :radio_buttons  %>
+  
+  <%= image_tag(asset_path(@team.imagePath), size: "120x120") %>
+  <%= f.input :imagePath, placeholder: 'Image Path' %>
+  

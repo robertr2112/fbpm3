@@ -1,0 +1,14 @@
+  <tr>
+    <td><%= link_to pool.name, pool %></td>
+    <td><%= render 'show_type', :pool => pool %></td>
+    <% if pool.isPublic %>
+      <td>Public</td>
+    <% else %>
+      <td>Private</td>
+    <% end %>
+    <% if !pool.isMember?(current_user) %>
+      <td><%= link_to "Join", join_path(pool.id) %></td>
+    <% else %>
+      <td>Member</td>
+    <% end %>
+  </tr>
