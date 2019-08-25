@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update, :show, :destroy]
-  before_filter :correct_user, only: [:edit, :update]
-  before_filter :admin_user, only: :destroy
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
 
   def new
     redirect_to(root_path) unless !signed_in?
@@ -73,9 +73,11 @@ class UsersController < ApplicationController
       # First we need to delete the pools owned by this user and associated
       # pool memberships
       #
-      @user.pools.each do |pool|
-        pool.remove_memberships
-        pool.recurse_delete
+      if @user.pools
+        @user.pools.each do |pool|
+          pool.remove_memberships
+          pool.recurse_delete
+        end
       end
       @user.destroy
       flash[:success] = "User deleted."

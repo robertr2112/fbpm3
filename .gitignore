@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/coverage
 
 # Ignore uploaded files in development
 /storage/*
@@ -25,3 +26,13 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore other unneeded files.
+database.yml
+*.swp
+*~
+*.kate-swp
+.project
+.DS_Store
+.idea
+.secret

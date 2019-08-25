@@ -20,8 +20,8 @@
 
 class User < ApplicationRecord
   
-  has_many :pools, through: :pool_memberships, dependent: :destroy
   has_many :pool_memberships, dependent: :destroy
+  has_many :pools, through: :pool_memberships, dependent: :destroy
   has_many :entries, dependent: :delete_all
 
   before_save { email.downcase! }

@@ -29,6 +29,8 @@ gem 'font-awesome-rails'
 gem 'sassc-rails'
 
 # Use CoffeeScript for .coffee assets and views
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails', '4.3.1'
 gem 'jquery-turbolinks', '2.1.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -44,16 +46,19 @@ gem 'nokogiri'
 gem 'email_validator'
 
 # Database.  Using the same database for production/development
-gem 'pg',  '~> 2.0'
+gem 'pg',  '~> 0.20'
+
+group :development do
+  gem 'web-console', '>=3.3.0'
+end
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '>=3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rspec-rails', '~>3.7'
+  gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'childprocess', '0.8.0'
@@ -62,8 +67,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '2.18.0'
-  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'webdrivers'
   gem 'simplecov', require: false, group: :test
   gem 'launchy'
   gem 'libnotify', '0.9.4'

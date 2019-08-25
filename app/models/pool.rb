@@ -19,8 +19,8 @@ class Pool < ApplicationRecord
 
   POOL_TYPES = { PickEm: 0, PickEmSpread: 1, Survivor: 2, SUP: 3 }
 
-  has_many   :users, through: :pool_memberships
   has_many   :pool_memberships, dependent: :destroy
+  has_many   :users, through: :pool_memberships
   has_many   :entries, dependent: :delete_all
   belongs_to :season
 
