@@ -11,7 +11,7 @@ gem 'bcrypt', '3.1.11'
 gem 'annotate'
 gem 'faker', '1.8.7'
 gem 'select2-rails'
-gem 'simple_form', '3.5.0'
+gem 'simple_form'
 gem 'cocoon'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
@@ -21,7 +21,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 #
 # Bootstrap support gems
 #
-gem 'bootstrap-sass'
+gem 'bootstrap', '4.3.1'
 gem 'bootstrap-will_paginate', '0.0.11'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
@@ -87,4 +87,3 @@ end
 # gem 'debugger'
 
 gem 'execjs'
-gem 'therubyracer', :platforms => :ruby
