@@ -7,9 +7,9 @@
   <!-- Render the main navigation bar -->
   <%= render 'shared/sidebar_nav', pool: @pool %>
   <div class="col-sm-8">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><%= "Make picks for Entry: #{@entry.name} "%></div>
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-header"><%= "Make picks for Entry: #{@entry.name} "%></div>
+      <div class="card-body">
         <% @teams = Team.all.where(nfl: true) %>
         <%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>
         <br />

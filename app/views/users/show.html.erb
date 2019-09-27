@@ -13,7 +13,7 @@
 </div>
 <% if !current_user.confirmed? %>
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2 main">
+    <div class="col-sm-8 offset-2 main">
       <p>This user account needs to be confirmed before you can use this site.
         Please look for the email with the subject <i>"Confirm Registration" </i>from
         info@fbpm.com and click the Confirmation URL.  
@@ -25,9 +25,9 @@
     <!-- Render the main navigation bar -->
     <%= render 'shared/sidebar_nav', pool: nil %>
     <div class="col-sm-8 main">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><%= "#{@user.name} Profile" %> </div>
-        <div class="panel-body">
+      <div class="card">
+        <div class="card-header"><%= "#{@user.name} Profile" %> </div>
+        <div class="card-body">
           <h3>My Pools</h3>
           <ul id="my-pool">
             <% if current_season(1) %>

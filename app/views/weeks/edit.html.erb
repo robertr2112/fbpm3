@@ -6,10 +6,10 @@
   <!-- Render the main navigation bar -->
   <%= render 'shared/sidebar_nav', pool: nil %>
   <div class="col-sm-8">
-    <div class="panel panel-primary">
+    <div class="card">
       <% if @week.checkStatePend %>
-        <div class="panel-heading">Edit Game Information </div>
-        <div class="panel-body">
+        <div class="card-header">Edit Game Information </div>
+        <div class="card-body">
           <h1>Edit Week <%= @week.week_number %></h1>
           <%= simple_form_for(@week, html: { class: 'form-inline' }) do |f| %>
             <%= f.error_notification %>
@@ -21,8 +21,8 @@
           <% end %>
         </div>
       <% elsif @week.checkStateClosed %>
-        <div class="panel-heading">Enter Game Scores </div>
-        <div class="panel-body">
+        <div class="card-header">Enter Game Scores </div>
+        <div class="card-body">
           <h1>Submit Scores Week <%= @week.week_number %></h1>
           <%= simple_form_for(@week, html: { class: 'form-inline' }) do |f| %>
             <% @teams = Team.all.where(nfl: true) %>

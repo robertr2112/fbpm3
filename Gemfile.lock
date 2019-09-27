@@ -128,7 +128,6 @@ GEM
       railties (>= 3.2)
     libnotify (0.9.4)
       ffi (>= 1.0.11)
-    libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -199,7 +198,6 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rdoc (4.3.0)
-    ref (2.0.0)
     regexp_parser (1.6.0)
     rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
@@ -265,9 +263,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
@@ -338,7 +333,6 @@ DEPENDENCIES
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
-  therubyracer
   turbolinks (= 5.1.0)
   uglifier
   web-console (>= 3.3.0)

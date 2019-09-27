@@ -6,9 +6,9 @@
   <!-- Render the main navigation bar -->
   <%= render 'shared/sidebar_nav', pool: @pool %>
   <div class="col-sm-8">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><%= @pool.name %></div>
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-header"><%= @pool.name %></div>
+      <div class="card-body">
         <strong>Pool Type</strong>
         <%= render 'show_type', pool: @pool %><br />
         <strong>Status</strong>
@@ -33,22 +33,6 @@
       </div>
     </div>
   </div>
-  <% if 0 %>
-  <!-- >
-  <div class="col-md-2">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Members</div>
-      <div class="panel-body">
-        <% for user in @pool.users %>
-          <ul class="list-group" id="pool-members">
-            <%= render 'pool_member', user: user, pool: @pool %>
-          </ul->
-        <% end %>
-      </div>
-    </div>
-  </div>
-  < -->
-  <% end %>
 </div>
 
 

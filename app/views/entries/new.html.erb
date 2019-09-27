@@ -7,9 +7,9 @@
   <!-- Render the main navigation bar -->
   <%= render 'shared/sidebar_nav', pool: @pool %>
   <div class="col-sm-8">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Create New Entry</div>
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-header">Create New Entry</div>
+      <div class="card-body">
         <%= simple_form_for [@pool, @entry], html: { class: 'form-horizontal pull-left' },
               wrapper: :horizontal_form,
               wrapper_mappings: {

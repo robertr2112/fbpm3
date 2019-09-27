@@ -2,14 +2,14 @@
 <html>
   <head>
      <title><%= full_title(yield(:title)) %></title>
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <%= stylesheet_link_tag "application", media: "all",
                              "data-turbolinks-track": 'reload' %>
     <%= javascript_include_tag "application", "data-turbolinks-track": 'reload' %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <%= render 'layouts/header' %>
     <div class="container">
       <%# Rails flash messages styled for Twitter Bootstrap 3.0 %>

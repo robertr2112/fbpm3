@@ -8,9 +8,9 @@
   <!-- Render the main navigation bar -->
   <%= render 'shared/sidebar_nav', pool: @pool %>
   <div class="col-sm-8">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Update User Profile</div>
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-header">Update User Profile</div>
+      <div class="card-body">
         <%= simple_form_for @user, html: { class: 'form-horizontal' },
             wrapper: :horizontal_form,
             wrapper_mappings: {
