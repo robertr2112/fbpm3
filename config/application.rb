@@ -17,7 +17,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module MyCoolApp
+module FBApps
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
@@ -30,5 +30,9 @@ module MyCoolApp
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.time_zone = "Central Time (US & Canada)"
+
+    # Add custom fonts to the asset pipline
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    #config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
   end
 end

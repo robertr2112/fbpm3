@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.0'
+ruby '2.6.6'
 #ruby-gemset=Rails_fb3
 
 gem 'rails','~> 5.2.3'
@@ -21,18 +21,17 @@ gem 'bootsnap', '>= 1.1.0', require: false
 #
 # Bootstrap support gems
 #
-gem 'bootstrap', '4.3.1'
-gem 'bootstrap-will_paginate', '0.0.11'
+gem 'bootstrap', '4.4.1'
+#gem 'bootstrap-will_paginate', '0.0.11'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
 # Use SCSS for stylesheets
-gem 'sassc-rails'
+gem 'sassc-rails', '~>2.1.2'
 
 # Use CoffeeScript for .coffee assets and views
-gem 'uglifier'
-gem 'coffee-rails'
-gem 'jquery-rails', '4.3.1'
-gem 'jquery-turbolinks', '2.1.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~>4.2'
+gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '5.1.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -60,7 +59,6 @@ group :development, :test do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'database_cleaner'
   gem 'childprocess', '0.8.0'
   gem 'letter_opener_web'
   gem 'pry-rails'
@@ -68,11 +66,12 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'webdrivers'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false, group: :test
   gem 'launchy'
   gem 'libnotify', '0.9.4'
   gem 'rubocop-rspec'
+  gem 'database_cleaner'
 end
 
 group :doc do

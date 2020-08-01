@@ -1,13 +1,15 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
+require 'spec_helper'
 require 'rspec/rails'
-# Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rails'
+require 'capybara/rspec'
 require 'simplecov'
+
+# Start the testing coverage reporting
 SimpleCov.start
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -90,6 +92,15 @@ RSpec.configure do |config|
   config.after(:all) do
     DatabaseCleaner.clean
   end
+
+  # This block configures Caypbara's driver to use Selenium
+  # It makes it use the chrome browser, but can also be configured 
+  # to user Firefox, etc. 
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+  
+  Capybara.server = :puma, { Silent: true }
  
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!

@@ -6,13 +6,20 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/bundle/
+/vendor/ruby/
 
-# Ignore all logfiles and tempfiles.
+# minimal Rails specific artifacts
+db/*.sqlite3
+/db/*.slite3-journal
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
 /coverage
+
+# Leave out config/master.key
+/config/master.key
 
 # Ignore uploaded files in development
 /storage/*
@@ -28,7 +35,12 @@
 /config/master.key
 
 # Ignore other unneeded files.
-database.yml
+/config/database.yml
+/capybara*
+/capybara-*.html
+/cache
+/gems
+/specifications
 *.swp
 *~
 *.kate-swp
