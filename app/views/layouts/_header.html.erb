@@ -15,44 +15,27 @@
       </li>
 
       <!-- Level one dropdown -->
-      <li class="nav-item dropdown">
-        <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
+      <li class="header-link-nav-item dropdown">
+        <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" class="header-nav-link dropdown-toggle"><%= current_user.name %></a>
         <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
-          <li><a href="#" class="dropdown-item">Some action </a></li>
-          <li><a href="#" class="dropdown-item">Some other action</a></li>
 
-          <li class="dropdown-divider"></li>
-
-          <!-- Level two dropdown-->
-          <li class="dropdown-submenu">
-            <a id="dropdownMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-            <ul aria-labelledby="dropdownMenu2" class="dropdown-menu border-0 shadow">
-              <li>
-                <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-              </li>
-
-              <!-- Level three dropdown-->
-              <li class="dropdown-submenu">
-                <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                <ul aria-labelledby="dropdownMenu3" class="dropdown-menu border-0 shadow">
-                  <li><a href="#" class="dropdown-item">3rd level</a></li>
-                  <li><a href="#" class="dropdown-item">3rd level</a></li>
-                </ul>
-              </li>
-              <!-- End Level three -->
-
-              <li><a href="#" class="dropdown-item">level 2</a></li>
-              <li><a href="#" class="dropdown-item">level 2</a></li>
-            </ul>
+          <li><%= link_to '<i class="fa fa-user fa-fw"></i>Profile'.html_safe, current_user %></li>
+          <li><%= link_to '<i class="fa fa-cog fa-fw"></i>Settings'.html_safe, edit_user_path(current_user) %></li>
+          <% if !current_user.confirmed? %>
+            <li><%= link_to '<i class="fa fa-envelope fa-fw"></i>Resend Confirmation'.html_safe,
+                             resend_confirm_path(current_user) %></li>
+          <% end %>
+          <li class="divider"></li>
+          <li>
+            <%= link_to '<i class="fa fa-sign-out fa-fw"></i>Sign out'.html_safe, signout_path, method: "delete" %>
           </li>
-            <!-- End Level two -->
         </ul>
       </li>
       <!-- End Level one -->
-
     </ul>
     <% else %>
-    <%= form_tag(sessions_path, class: 'navbar-form navbar-right',
+    <%= form_tag(sessions_path, class: 'form-inline',
                    role: 'form') do %>
       <div class="form-group">
         <%= text_field_tag :email, params[:email],

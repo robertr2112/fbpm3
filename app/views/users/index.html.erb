@@ -8,11 +8,11 @@
   <!-- Render the main navigation bar -->
   <%= render 'shared/sidebar_nav', pool: @pool %>
   <div class="col-sm-8">
-    <div class="card">
-      <div class="card-header">Create New Pool</div>
-      <div class="card-body">
+    <div class="panel panel-primary">
+      <div class="panel-header">Create New Pool</div>
+      <div class="panel-body">
         <%= will_paginate %>
-  
+
         <ul class="users">
           <%= render @users.sort_by {|u| u.name.downcase} %>
         </ul>

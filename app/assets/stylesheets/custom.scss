@@ -90,7 +90,7 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
-  color: $gray-light;
+  color: $gray;
   a {
     color: $gray;
     &:hover {
@@ -147,6 +147,9 @@ footer {
   }
 }
 
+/*
+ * Dropdown menu styling
+ */
 .dropdown-menu .dropdown-menu {
   top: 0;
   left: 100%;

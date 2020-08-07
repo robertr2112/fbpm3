@@ -7,9 +7,9 @@
   <!-- Render the main navigation bar -->
   <%= render 'shared/sidebar_nav', pool: nil%>
   <div class="col-sm-8">
-    <div class="card">
-      <div class="card-header">Enter Game Information </div>
-      <div class="card-body">
+    <div class="panel panel-header">
+      <div class="panel-header">Enter Game Information </div>
+      <div class="panel-body">
         <%= simple_form_for([@season, @week], html: { class: 'form-inline' }) do |f| %>
           <%= f.error_notification %>
           <%= f.simple_fields_for :games do |g| %>

@@ -2,9 +2,9 @@
 <h1>Sign up</h1>
 <div class="row">
   <div class="col-sm-8 offset-2">
-    <div class="card">
-      <div class="card-header">Create User Account</div>
-        <div class="card-body">
+    <div class="panel panel-primary">
+      <div class="panel-header">Create User Account</div>
+        <div class="panel-body panel-body-light">
           <%= simple_form_for @user, html: { class: 'form-horizontal' },
             wrapper: :horizontal_form,
             wrapper_mappings: {
@@ -13,7 +13,7 @@
               file: :horizontal_file_input,
               boolean: :horizontal_boolean
           } do |f| %>
- 
+
             <%= render 'fields', f: f, edit: 0 %>
             <%= f.button :submit, 'Create my account', class: "btn btn-large btn-primary" %>
           <% end %>

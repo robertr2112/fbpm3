@@ -6,11 +6,11 @@
 <div class="row">
 <%= render 'shared/sidebar_nav', pool: nil %>
   <div class="col-sm-8">
-    <div class="card">
-      <div class="card-header"><%= "Week #{@week.week_number}" %> &nbsp;-&nbsp;State:
+    <div class="panel panel-header">
+      <div class="panel-header"><%= "Week #{@week.week_number}" %> &nbsp;-&nbsp;State:
            <%= render "shared/show_week_state", week: @week %>
       </div>
-      <div class="card-body">
+      <div class="panel-body">
         <h1> Week <%= @week.week_number %> Games</h1>
         <% if current_user.admin? %>
           <% if !@week.checkStateFinal %>

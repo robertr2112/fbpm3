@@ -23,7 +23,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Bootstrap support gems
 #
 gem 'bootstrap', '4.4.1'
-#gem 'bootstrap-will_paginate', '0.0.11'
+gem 'will_paginate-bootstrap4'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
 # Use SCSS for stylesheets

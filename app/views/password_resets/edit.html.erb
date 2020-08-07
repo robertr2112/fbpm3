@@ -3,9 +3,9 @@
 
 <div class="row">
   <div class="col-sm-8 offset-2">
-    <div class="card">
-      <div class="card-header">Create New Pool</div>
-      <div class="card-body">
+    <div class="panel panel-primary">
+      <div class="panel-header">Create New Pool</div>
+      <div class="panel-body">
         <%= simple_form_for @user, :url => password_reset_path(params[:id]),
                html: { class: 'form-horizontal pull-left' },
                wrapper: :horizontal_form,

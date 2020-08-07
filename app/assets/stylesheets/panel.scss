@@ -1,0 +1,69 @@
+
+/*
+ * Setup panels using Bootstrap 4 cards
+ */
+.panel {
+  @extend .card;
+}
+
+.panel-header {
+  @extend .card-header;
+}
+
+.panel-body {
+  @extend .card-body;
+  @extend .bg-light;
+  @extend .text-dark;
+}
+
+.panel-text {
+  @extend .card-text;
+}
+
+/*
+ * Panel colors
+ */
+.panel-primary {
+  @extend .bg-primary;
+  @extend .text-white;
+}
+
+.panel-secondary {
+  @extend .bg-secondary;
+  @extend .text-white;
+}
+
+.panel-success {
+  @extend .bg-success;
+  @extend .text-white;
+}
+
+.panel-danger {
+  @extend .bg-danger;
+  @extend .text-white;
+}
+
+.panel-warning {
+  @extend .bg-warning;
+  @extend .text-white;
+}
+
+.panel-info {
+  @extend .bg-info;
+  @extend .text-white;
+}
+
+.panel-light {
+  @extend .bg-light;
+  @extend .text-white;
+}
+
+.panel-dark {
+  @extend .bg-dark;
+  @extend .text-white;
+}
+
+.panel-light {
+  @extend .bg-light;
+  @extend .text-white;
+}

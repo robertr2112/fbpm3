@@ -16,7 +16,7 @@
     <div class="col-sm-8 offset-2 main">
       <p>This user account needs to be confirmed before you can use this site.
         Please look for the email with the subject <i>"Confirm Registration" </i>from
-        info@fbpm.com and click the Confirmation URL.  
+        info@fbpm.com and click the Confirmation URL.
       </p>
     </div>
   </div>
@@ -25,9 +25,9 @@
     <!-- Render the main navigation bar -->
     <%= render 'shared/sidebar_nav', pool: nil %>
     <div class="col-sm-8 main">
-      <div class="card">
-        <div class="card-header"><%= "#{@user.name} Profile" %> </div>
-        <div class="card-body">
+      <div class="panel panel-primary">
+        <div class="panel-header"><%= "#{@user.name} Profile" %> </div>
+        <div class="panel-body">
           <h3>My Pools</h3>
           <ul id="my-pool">
             <% if current_season(1) %>
@@ -64,12 +64,12 @@
                               week_id: pool.getCurrentWeek.id).first %>
                           <% if pick %>
                             <% game_pick = pick.game_picks.first %>
-                            <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
+                            <td><%= link_to Team.find(game_pick.chosenTeamIndex).name,
                                     edit_pick_path(pick) %></td>
                           <% else %>
                             <% if pool.getCurrentWeek.week_number < pool.starting_week %>
                               <td><%= link_to "Pool has not started yet!", "#" %></td>
-                            <% else %> 
+                            <% else %>
                               <% if entry.survivorStatusIn %>
                                 <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
                               <% else %>
@@ -78,14 +78,14 @@
                             <% end %>
                           <% end %>
                         <% end %>
-                      <% end %> 
+                      <% end %>
                     </tr>
                   <% end %>
                 </table>
                 </div>
               <% end %>
             <% else %>
-              <p>You currently are not a member of any pool for the current Season.  
+              <p>You currently are not a member of any pool for the current Season.
                 <%= link_to "Create", new_pool_path %>
                 or
                 <%= link_to "Join", pools_path %>

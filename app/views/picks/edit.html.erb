@@ -6,9 +6,9 @@
   <%= render 'shared/sidebar_nav', pool: @pool %>
   <h1>Edit picks for Week <%=@week.week_number%></h1>
   <div class="col-sm-8">
-    <div class="card">
-      <div class="card-header">Make picks for week <%=@week.week_number%></div>
-      <div class="card-body">
+    <div class="panel panel-primary">
+      <div class="panel-header">Make picks for week <%=@week.week_number%></div>
+      <div class="panel-body">
         <% @teams = Team.all.where(nfl: true) %>
         <%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>
         <br />
@@ -30,4 +30,3 @@
     </div>
   </div>
 </div>
-

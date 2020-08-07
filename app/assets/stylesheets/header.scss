@@ -27,11 +27,13 @@
 .header-links {
   @extend .collapse;
   @extend .navbar-collapse;
+  @extend .d-flex;
 }
 
 .header-links > ul {
+  @extend .d-flex;
   @extend .navbar-nav;
-  @extend .justify-content-center;
+  @extend .justify-content-end;
 }
 
 /*
