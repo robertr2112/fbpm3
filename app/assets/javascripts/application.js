@@ -16,8 +16,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require jquery.turbolinks
 //= require cocoon
 //= require select2
 //= require_tree .
-

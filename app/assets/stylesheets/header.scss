@@ -1,0 +1,64 @@
+/*****************
+ * Header styles *
+/*****************/
+.header-main {
+  @extend .navbar;
+  @extend .navbar-light;
+  @extend .bg-light;
+  @extend .navbar-expand-md;
+  @extend .fixed-top;
+  background-image: linear-gradient(15deg, #80d0c7 0%, #13547a 100%);
+}
+
+.header-brand {
+  @extend .navbar-brand;
+  @extend .col-4;
+  font-size: inherit;
+}
+
+.header-button {
+  @extend .navbar-toggler;
+}
+
+.header-button-toggler {
+  @extend .navbar-toggler-icon;
+}
+
+.header-links {
+  @extend .collapse;
+  @extend .navbar-collapse;
+}
+
+.header-links > ul {
+  @extend .navbar-nav;
+  @extend .justify-content-center;
+}
+
+/*
+ * Make the header links a darker black and bold on hover
+ */
+.header-links li {
+  a {
+    color: #1a1a1a !important;
+    &:hover {
+      color: #0d0d0d !important;
+      font-weight: bold !important;
+    }
+  }
+}
+
+.header-link-nav-item {
+  @extend .nav-item;
+}
+
+.header-nav-link {
+  @extend .nav-link;
+}
+
+/*
+ * Make the active header link bold
+ */
+.header-links .header-link-nav-item > .header-nav-link.active  {
+    color: #0d0d0d !important;
+    font-weight: bold !important;
+}

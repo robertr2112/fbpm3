@@ -1,51 +1,70 @@
-<header class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" 
-              data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "Football Pool Mania", root_path, 
-                  class:'navbar-brand' %>
-    </div>
-    <div class="navbar-collapse collapse">
-    <% if signed_in? %>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= current_user.name %><b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to '<i class="fa fa-user fa-fw"></i>Profile'.html_safe, current_user %></li>
-            <li><%= link_to '<i class="fa fa-cog fa-fw"></i>Settings'.html_safe, edit_user_path(current_user) %></li>
-            <% if !current_user.confirmed? %>
-              <li><%= link_to '<i class="fa fa-envelope fa-fw"></i>Resend Confirmation'.html_safe,
-                               resend_confirm_path(current_user) %></li>
-            <% end %>
-            <li class="divider"></li>
-            <li>
-              <%= link_to '<i class="fa fa-sign-out fa-fw"></i>Sign out'.html_safe, signout_path, method: "delete" %>
-            </li>
-          </ul>
-        </li>
-      </ul>
+<nav class="header-main">
+  <%= link_to "Football Pool Mania", root_path, class:'header-brand' %>
+  <% if signed_in? %>
+  <button class="header-button" type="button" data-toggle="collapse"
+          data-target="#navbar-list-2" aria-controls="navbarNav" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="header-button-toggler"></span>
+  </button>
+  <div class="header-links" id="navbar-list-2">
+    <ul class="" id="main-nav-list">
+      <li class="header-link-nav-item">
+        <% active_class = active_class(root_path) %>
+        <%= link_to 'Home', root_path,
+                   class: "header-nav-link #{active_class}" %>
+      </li>
+
+      <!-- Level one dropdown -->
+      <li class="nav-item dropdown">
+        <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
+        <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
+          <li><a href="#" class="dropdown-item">Some action </a></li>
+          <li><a href="#" class="dropdown-item">Some other action</a></li>
+
+          <li class="dropdown-divider"></li>
+
+          <!-- Level two dropdown-->
+          <li class="dropdown-submenu">
+            <a id="dropdownMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
+            <ul aria-labelledby="dropdownMenu2" class="dropdown-menu border-0 shadow">
+              <li>
+                <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
+              </li>
+
+              <!-- Level three dropdown-->
+              <li class="dropdown-submenu">
+                <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
+                <ul aria-labelledby="dropdownMenu3" class="dropdown-menu border-0 shadow">
+                  <li><a href="#" class="dropdown-item">3rd level</a></li>
+                  <li><a href="#" class="dropdown-item">3rd level</a></li>
+                </ul>
+              </li>
+              <!-- End Level three -->
+
+              <li><a href="#" class="dropdown-item">level 2</a></li>
+              <li><a href="#" class="dropdown-item">level 2</a></li>
+            </ul>
+          </li>
+            <!-- End Level two -->
+        </ul>
+      </li>
+      <!-- End Level one -->
+
+    </ul>
     <% else %>
-      <%= form_tag(sessions_path, class: 'navbar-form navbar-right', 
-                     role: 'form') do %>
-        <div class="form-group">
-          <%= text_field_tag :email, params[:email],
-                class: 'form-control', placeholder: "Email"%>
-        </div>
-        <div class="form-group">
-          <%= password_field_tag :password, nil,
-                class: 'form-control', placeholder: "Password"%>
-        </div>
-        <%= submit_tag "Sign in", class: "btn btn-primary" %>
-      <% end %>
+    <%= form_tag(sessions_path, class: 'navbar-form navbar-right',
+                   role: 'form') do %>
+      <div class="form-group">
+        <%= text_field_tag :email, params[:email],
+              class: 'form-control', placeholder: "Email"%>
+      </div>
+      <div class="form-group">
+        <%= password_field_tag :password, nil,
+              class: 'form-control', placeholder: "Password"%>
+      </div>
+      <%= submit_tag "Sign in", class: "btn btn-primary" %>
     <% end %>
-    </div><!--/.navbar-collapse -->
+
+    <% end %>
   </div>
-</header>
+</nav>

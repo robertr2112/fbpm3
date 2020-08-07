@@ -30,4 +30,12 @@ module ApplicationHelper
     @tabindex ||= 0
     @tabindex += 1
   end
+
+  #
+  # Set active on header navs
+  #
+  def active_class(path)
+     "active" if current_page?(path)
+  end
+
 end

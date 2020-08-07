@@ -10,6 +10,7 @@ gem 'rails','~> 5.2.3'
 gem 'bcrypt', '3.1.11'
 gem 'annotate'
 gem 'faker', '1.8.7'
+# The following are for form help
 gem 'select2-rails'
 gem 'simple_form'
 gem 'cocoon'
@@ -67,6 +68,7 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'webdrivers'
   gem 'simplecov', require: false, group: :test
   gem 'launchy'
   gem 'libnotify', '0.9.4'
