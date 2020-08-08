@@ -14,9 +14,9 @@
         <%= simple_form_for @team, html: { class: 'form-horizontal' },
           wrapper: :horizontal_form,
           wrapper_mappings: {
-            check_boxes: :horizontal_radio_and_checkboxes,
-            radio_buttons: :horizontal_radio_and_checkboxes,
-            file: :horizontal_file_input,
+            check_boxes: :horizontal_collection,
+            radio_buttons: :horizontal_collection,
+            file: :horizontal_file,
             boolean: :horizontal_boolean
           } do |f| %>
             <%= render 'fields', f: f, edit: 1 %>
