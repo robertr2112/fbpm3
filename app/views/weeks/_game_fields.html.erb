@@ -1,21 +1,26 @@
 <div class='nested-fields well'>
   <fieldset>
-    <%= f.input :awayTeamIndex, label: false,
+    <%= f.input :game_date, as: :datetime, html5: true  %>
+    <div class="row">
+      <div class="span3">
+        <%= f.input :awayTeamIndex, label: false,
                     collection: Team.all.where(nfl: true), value_method: :id,
                     label_method: :name,
                     placeholder: "Away Team",
                     include_blank: true,
-                    autofocus: true, 
+                    autofocus: true,
                     input_html: { id: "awayteam" } %>
-    <%= f.input :homeTeamIndex, label: false,
+      </div>
+      <div class="span3">
+        <%= f.input :homeTeamIndex, label: false,
                     collection: Team.all.where(nfl: true), value_method: :id,
                     label_method: :name,
                     placeholder: "Home Team",
                     include_blank: true,
                     input_html: { id: "hometeam" } %>
+      </div>
     <%= f.input :_destroy, as: :hidden %>
     &nbsp;&nbsp;&nbsp;
     <%= link_to_remove_association "remove", f %>
   </fieldset>
 </div>
-
