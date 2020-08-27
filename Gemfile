@@ -77,7 +77,7 @@ group :test do
 end
 
 group :doc do
-  gem 'sdoc', '0.4.1', require: false
+  gem 'sdoc', require: false
 end
 
 group :production do
