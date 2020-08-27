@@ -11,7 +11,15 @@
         <div class="panel-header">Edit Game Information </div>
         <div class="panel-body">
           <h1>Edit Week <%= @week.week_number %></h1>
-          <%= simple_form_for(@week, html: { class: 'form-inline' }) do |f| %>
+          <%= simple_form_for @week,
+            wrapper: :horizontal_form,
+            wrapper_mappings: {
+              datetime:      :horizontal_multi_select,
+              check_boxes:   :horizontal_collection,
+              radio_buttons: :horizontal_collection,
+              file:          :horizontal_file,
+              boolean:       :horizontal_boolean
+           } do |f| %>
             <%= f.error_notification %>
             <%= f.simple_fields_for :games do |g| %>
               <%= render 'game_fields', f: g %>

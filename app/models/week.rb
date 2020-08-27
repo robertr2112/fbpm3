@@ -18,7 +18,7 @@ class Week < ApplicationRecord
   STATES = { Pend: 0, Open: 1, Closed: 2, Final: 3 }
 
   belongs_to :season
-  has_many   :games, dependent: :delete_all
+  has_many   :games, inverse_of: :week, dependent: :delete_all
 
   accepts_nested_attributes_for :games
 

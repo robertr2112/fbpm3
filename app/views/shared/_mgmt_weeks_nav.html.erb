@@ -1,6 +1,5 @@
-<nav class="navbar navbar-default weeks-nav" role="navigation">
-  <div class="container">
-    <div class="btn-group-sm">
+<div class="btn-toolbar weeks-nav" role="toolbar" aria-label="NFL Weeks Toolbar buttons">
+  <div class="btn-group-sm role="group" aria-label="First group">
       <% if current_season(1) %>
         <% if current_user.admin? %>
           <%= link_to "Season #{season.year}", season_path(season), :class => "btn btn-primary",
@@ -29,6 +28,5 @@
       <% else %>
         <%= link_to "Create new season", new_season_path %>
       <% end %>
-    </div>
   </div>
-</nav>
+</div>

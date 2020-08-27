@@ -1,53 +1,47 @@
 <nav class="header-main">
   <%= link_to "Football Pool Mania", root_path, class:'header-brand' %>
-  <% if signed_in? %>
-  <button class="header-button" type="button" data-toggle="collapse"
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbar-list-2" aria-controls="navbarNav" aria-expanded="false"
           aria-label="Toggle navigation">
-    <span class="header-button-toggler"></span>
+    <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="header-links" id="navbar-list-2">
-    <ul class="" id="main-nav-list">
-      <li class="header-link-nav-item">
-        <% active_class = active_class(root_path) %>
-        <%= link_to 'Home', root_path,
-                   class: "header-nav-link #{active_class}" %>
-      </li>
-
+  <div class="collapse navbar-collapse justify-content-end" id="navbar-list-2">
+  <% if signed_in? %>
+    <ul class="navbar-nav" id="main-nav-list">
       <!-- Level one dropdown -->
-      <li class="header-link-nav-item dropdown">
+      <li class="nav-item dropdown">
         <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
-           aria-expanded="false" class="header-nav-link dropdown-toggle"><%= current_user.name %></a>
-        <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
+           aria-expanded="false" class="nav-link dropdown-toggle">
+           <%= current_user.name %></a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
-          <li><%= link_to '<i class="fa fa-user fa-fw"></i>Profile'.html_safe, current_user %></li>
-          <li><%= link_to '<i class="fa fa-cog fa-fw"></i>Settings'.html_safe, edit_user_path(current_user) %></li>
+          <%= link_to '<i class="fa fa-user fa-fw"></i>Profile'.html_safe, current_user,
+                class:'dropdown-item' %>
+          <%= link_to '<i class=" fa fa-cog fa-fw"></i>Settings'.html_safe,
+                edit_user_path(current_user), class:'dropdown-item'  %>
           <% if !current_user.confirmed? %>
-            <li><%= link_to '<i class="fa fa-envelope fa-fw"></i>Resend Confirmation'.html_safe,
-                             resend_confirm_path(current_user) %></li>
+            <%= link_to '<i class="fa fa-envelope fa-fw"></i>Resend Confirmation'.html_safe,
+                resend_confirm_path(current_user), class:'dropdown-item' %>
           <% end %>
-          <li class="divider"></li>
-          <li>
-            <%= link_to '<i class="fa fa-sign-out fa-fw"></i>Sign out'.html_safe, signout_path, method: "delete" %>
-          </li>
-        </ul>
+          <div class="dropdown-divider"></div>
+          <%= link_to '<i class="fa fa-sign-out fa-fw"></i>Sign out'.html_safe,
+          signout_path, method: "delete", class:'dropdown-item' %>
+        </div>
       </li>
       <!-- End Level one -->
     </ul>
-    <% else %>
-    <%= form_tag(sessions_path, class: 'form-inline',
-                   role: 'form') do %>
-      <div class="form-group">
+  <% else %>
+    <%= form_tag(sessions_path, class: 'header-form-inline', role: 'form') do %>
+      <div class="header-form-group">
         <%= text_field_tag :email, params[:email],
-              class: 'form-control', placeholder: "Email"%>
+              class: 'header-form-control', placeholder: "Email"%>
       </div>
-      <div class="form-group">
+      <div class="header-form-group">
         <%= password_field_tag :password, nil,
-              class: 'form-control', placeholder: "Password"%>
+              class: 'header-form-control', placeholder: "Password"%>
       </div>
-      <%= submit_tag "Sign in", class: "btn btn-primary" %>
+      <%= submit_tag "Sign in", class: "header-btn" %>
     <% end %>
-
-    <% end %>
+  <% end %>
   </div>
 </nav>
