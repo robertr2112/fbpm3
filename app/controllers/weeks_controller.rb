@@ -17,7 +17,7 @@ class WeeksController < ApplicationController
         flash[:error] = "Cannot create week. This would exceed the number of weeks for this Season!"
         redirect_to @season
       end
-        
+
     else
       flash[:error] = "Cannot create week. Season with id:#{params[:season_id]} does not exist!"
       redirect_to seasons_path
@@ -36,7 +36,7 @@ class WeeksController < ApplicationController
       @week.setState(Week::STATES[:Pend])
       if @week.save
         # Handle a successful save
-        flash[:success] = 
+        flash[:success] =
             "Week #{@week.week_number} for '#{@season.year}' was created successfully!"
         # Set the state to Pend
         redirect_to @week
@@ -63,17 +63,17 @@ class WeeksController < ApplicationController
         flash[:error] = "Cannot create week. This would exceed the number of weeks for this Season!"
         redirect_to season
       end
-        
+
     else
       flash[:error] = "Cannot create week. Season with id:#{params[:season_id]} does not exist!"
       redirect_to seasons_path
     end
-    
+
     @week.save
     @week.create_nfl_week
     if @week.save
       # Handle a successful save
-      flash[:success] = 
+      flash[:success] =
             "Week #{@week.week_number} for '#{season.year}' was created successfully!"
       redirect_to @week
     else
@@ -84,18 +84,18 @@ class WeeksController < ApplicationController
   def add_scores
     @week = Week.find(params[:id])
     season = Season.find(@week.season_id)
-    
+
     @week.add_scores_nfl_week
-    
+
     redirect_to @week
   end
 
-  
+
   def edit
     @week = Week.find(params[:id])
     @games = @week.games
     if @week.checkStateOpen || @week.checkStateFinal
-      if @week.checkStateOpen 
+      if @week.checkStateOpen
         flash[:notice] = "Can't Edit the scores for the week until it is in the Closed state!"
       else
         flash[:notice] = "Can't Edit the week once it is in the Final state!"
@@ -178,11 +178,12 @@ class WeeksController < ApplicationController
     def week_params
       params.require(:week).permit(:state, :week_number,
                                    games_attributes: [:id, :week_id,
-                                                     :homeTeamIndex, 
-                                                     :awayTeamIndex, 
-                                                     :spread, 
+                                                     :homeTeamIndex,
+                                                     :awayTeamIndex,
+                                                     :spread,
                                                      :homeTeamScore,
                                                      :awayTeamScore,
+                                                     :game_date,
                                                      :_destroy] )
     end
 
@@ -193,13 +194,13 @@ class WeeksController < ApplicationController
           return false
         end
       end
-      
+
       return true
     end
-    
+
     # Before filters
     def admin_user
       redirect_to current_user, notice: "Only an Admin User can access that page!" unless current_user.admin?
     end
-    
+
 end

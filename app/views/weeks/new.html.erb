@@ -20,10 +20,14 @@
               boolean:       :horizontal_boolean
         } do |f| %>
           <%= f.error_notification %>
-          <%= f.simple_fields_for :games do |g| %>
-            <%= render 'game_fields', f: g %>
-          <% end %>
-          <%= link_to_add_association 'Add New Game', f, :games, { tabindex: 70 } %>
+          <div id="weeks">
+            <%= f.simple_fields_for :games do |g| %>
+              <%= render 'game_fields', f: g %>
+            <% end %>
+            <div class='games'>
+              <%= link_to_add_association 'Add New Game', f, :games %>
+            </div>
+          </div>
           <br /><br />
           <%= f.button :submit, label: "Create week", class: 'btn btn-large btn-primary' %>
           <small><%= link_to "Auto create?", auto_create_path(@week.id) %></small>
