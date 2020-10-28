@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 #ruby-gemset=Rails_fb3
 
-gem 'rails','~> 5.2.3'
+gem 'rails','5.2.3'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '3.1.11'
